@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 
 	marvel "github.com/imjasonh/go-marvel"
 )
@@ -32,9 +33,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Find(w http.ResponseWriter, r *http.Request) {
 
+	PUBLIC_KEY := os.Getenv("MARVEL_PUBLIC_KEY")
+	PRIVATE_KEY := os.Getenv("MARVEL_PRIVATE_KEY")
+
 	client := marvel.Client{
-		PublicKey:  "893db2f3d7807888adf71b02b872026e",
-		PrivateKey: "5106b95613bcc63966d443607a38860e3c9d9c66",
+		PublicKey:  PUBLIC_KEY,
+		PrivateKey: PRIVATE_KEY,
 	}
 
 	r.ParseForm()

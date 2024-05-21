@@ -210,21 +210,22 @@
 
   <main>
     <section class="py-5 text-center container">
-      <div class="input-group mb-3">
-        <form action="/find" method="POST">
-          <input id="inputName" name="inputName" type="text" class="form-control" placeholder="Nome do Personagem (Case Sensitive)"
-            aria-label="Nome do Personagem (Case Sensitive)" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">Buscar</button>
+      <form action="/find" method="POST">
+        <div class="input-group mb-3 row">
+          <input id="inputName" name="inputName" type="text" class="form-control col-md-4"
+            placeholder="Nome do Personagem (Case Sensitive)" aria-label="Nome do Personagem (Case Sensitive)"
+            aria-describedby="basic-addon2">
+          <div class="input-group-append col-md-8 d-flex justify-content-start">
+            <input class="btn btn-primary" type="submit" value="Buscar" />
           </div>
-        </form>
-      </div>
-      </div>
+        </div>
+      </form>
     </section>
 
     <div class="album py-5 bg-body-tertiary">
       <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {{ if . }}
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {{ range .}}
           <div class="col">
             <div class="card shadow-sm">
@@ -239,6 +240,14 @@
             </div>
           </div>
           {{ end }}
+          {{ else }}
+          <div class="py-5 d-flex justify-content-center flex-column align-items-center">
+            <img src="/static/assets/brand/searchError.gif" alt="Animação de erro" height="300">
+            <h1 class="w-50 text-center mb-4">
+              Não encontrei nenhum personagem
+            </h1>
+          </div>
+          {{ end}}
         </div>
       </div>
     </div>

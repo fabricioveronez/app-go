@@ -8,4 +8,5 @@ RUN adduser --uid 1000 --disabled-password appuser
 USER appuser
 WORKDIR /app
 COPY --from=builder --chown=appuser:appuser /build/app .
+EXPOSE 5000
 CMD [ "./app" ]

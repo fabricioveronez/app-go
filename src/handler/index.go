@@ -19,13 +19,29 @@ var templates = []string{
 
 func Index(w http.ResponseWriter, r *http.Request) {
 
+	t, err := template.ParseFS(templatesFS, templates...)
+	if err != nil {
+		panic(err)
+	}
+
+	err = t.Execute(w, nil)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func Find(w http.ResponseWriter, r *http.Request) {
+
 	client := marvel.Client{
 		PublicKey:  "893db2f3d7807888adf71b02b872026e",
 		PrivateKey: "5106b95613bcc63966d443607a38860e3c9d9c66",
 	}
 
+	r.ParseForm()
+	name := r.FormValue("inputName")
+
 	caractersParam := marvel.CharactersParams{
-		NameStartsWith: "Iron",
+		NameStartsWith: name,
 	}
 
 	response, err := client.Characters(caractersParam)

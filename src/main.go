@@ -15,6 +15,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", handler.Index)
+	mux.HandleFunc("/find", handler.Find)
 
 	// Configuração para servir arquivos estáticos
 	staticFiles, _ := fs.Sub(staticFS, "static")
